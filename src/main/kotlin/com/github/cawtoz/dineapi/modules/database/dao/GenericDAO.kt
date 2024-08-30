@@ -8,6 +8,18 @@ import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.SQLException
 
+/**
+ * A generic Data Access Object (DAO) for performing CRUD operations on a database table.
+ *
+ * This class provides a set of common database operations for entities represented by a specific table.
+ * It requires implementations for inserting new records and converting database rows to entity instances.
+ *
+ * @param T The type of the entity represented by this DAO.
+ * @property entityName The name of the entity that this DAO manages.
+ * @property table The database table associated with this DAO.
+ * @property insertStatement A lambda function that defines how to insert an entity into the table.
+ * @property toEntity A lambda function that converts a database row to an entity instance.
+ */
 abstract class GenericDAO<T>(
     val entityName: String,
     val table: IntIdTable,
@@ -15,6 +27,11 @@ abstract class GenericDAO<T>(
     private val toEntity: (ResultRow) -> T
 ) {
 
+    /**
+     * Retrieves all entities from the database table.
+     *
+     * @return A list of all entities present in the table.
+     */
     fun selectAll(): List<T> {
         return try {
             transaction {
@@ -26,6 +43,12 @@ abstract class GenericDAO<T>(
         }
     }
 
+    /**
+     * Retrieves an entity by its ID.
+     *
+     * @param id The ID of the entity to retrieve.
+     * @return The entity with the specified ID, or null if no entity is found.
+     */
     fun selectById(id: Int): T? {
         return try {
             transaction {
@@ -37,6 +60,12 @@ abstract class GenericDAO<T>(
         }
     }
 
+    /**
+     * Deletes an entity by its ID.
+     *
+     * @param id The ID of the entity to delete.
+     * @return True if the deletion was successful, otherwise false.
+     */
     fun deleteById(id: Int): Boolean {
         return try {
             transaction {
@@ -48,6 +77,12 @@ abstract class GenericDAO<T>(
         }
     }
 
+    /**
+     * Inserts a new entity into the database table.
+     *
+     * @param entity The entity to insert.
+     * @return True if the insertion was successful, otherwise false.
+     */
     fun insert(entity: T): Boolean {
         return try {
             transaction {
