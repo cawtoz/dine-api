@@ -20,6 +20,7 @@ fun main() {
             json(Json { prettyPrint = true })
         }
 
+        DatabaseConfig.initDatabase()
     }.start(wait = true)
 
 }
