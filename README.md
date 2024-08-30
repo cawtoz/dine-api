@@ -44,8 +44,7 @@ Dine API is a RESTful API designed for comprehensive restaurant management. Impl
     The server will start on the port specified in the `.env` file.
 
 ## Contributing
-
-Contributions are welcome! Since the repository is not publicly writable, please follow these steps to suggest changes:
+Contributions are welcome!, Please follow these steps to suggest changes:
 
 1. Fork this repository. For detailed instructions, refer to the [GitHub documentation on forking a repository](https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository).
 
