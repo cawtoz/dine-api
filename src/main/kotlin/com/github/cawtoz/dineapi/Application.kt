@@ -21,6 +21,9 @@ fun main() {
         }
 
         DatabaseConfig.initDatabase()
+
+        routesModule()
+
     }.start(wait = true)
 
 }
