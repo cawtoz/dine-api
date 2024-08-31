@@ -6,10 +6,11 @@ import com.github.cawtoz.dineapi.modules.models.Food
 class FoodDAO: GenericDAO<Food>(
     "Food",
     Foods,
-    { statement, food ->
-        statement[Foods.name] = food.name
-        statement[Foods.description] = food.description
-        statement[Foods.price] = food.price
+    { food ->
+        this[Foods.name] = food.name
+        this[Foods.description] = food.description
+        this[Foods.price] = food.price
+        println(this)
     },
     { row ->
         Food(

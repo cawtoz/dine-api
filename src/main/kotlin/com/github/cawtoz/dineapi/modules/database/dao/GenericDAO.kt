@@ -1,10 +1,9 @@
 package com.github.cawtoz.dineapi.modules.database.dao
 
-import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.statements.InsertStatement
+import org.jetbrains.exposed.sql.statements.UpdateBuilder
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.sql.SQLException
 
@@ -17,13 +16,13 @@ import java.sql.SQLException
  * @param T The type of the entity represented by this DAO.
  * @property entityName The name of the entity that this DAO manages.
  * @property table The database table associated with this DAO.
- * @property insertStatement A lambda function that defines how to insert an entity into the table.
+ * @property statement A lambda function that defines how to insert an entity into the table.
  * @property toEntity A lambda function that converts a database row to an entity instance.
  */
 abstract class GenericDAO<T>(
     val entityName: String,
     val table: IntIdTable,
-    private val insertStatement: (InsertStatement<EntityID<Int>>, T) -> Unit,
+    private val statement: UpdateBuilder<*>.(T) -> Unit,
     private val toEntity: (ResultRow) -> T
 ) {
 
@@ -69,7 +68,7 @@ abstract class GenericDAO<T>(
     fun deleteById(id: Int): Boolean {
         return try {
             transaction {
-                table.deleteWhere { table.id eq id } != 0
+                table.deleteWhere { table.id eq id } > 0
             }
         } catch (e: SQLException) {
             println("Error deleting $entityName by id: ${e.message}")
@@ -87,7 +86,7 @@ abstract class GenericDAO<T>(
         return try {
             transaction {
                 table.insertAndGetId {
-                    insertStatement(it, entity)
+                    statement(it, entity)
                 }
                 true
             }
