@@ -10,6 +10,7 @@ inline fun <reified T : Any> Application.crudRoutes(path: String, dao: GenericDA
         getRoute<T>(path, dao)
         postRoute<T>(path, dao)
         deleteRoute(path, dao)
+        updateRoute<T>(path, dao)
     }
 
 }
