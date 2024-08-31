@@ -32,5 +32,5 @@ kotlin {
 }
 
 application {
-    mainClass.set("com.github.cawtoz.dineapi.ApplicationKt")
+    mainClass.set("com.github.cawtoz.dineapi.DineKt")
 }
