@@ -96,4 +96,26 @@ abstract class GenericDAO<T>(
         }
     }
 
+    /**
+     * Updates an existing entity in the database table.
+     *
+     * @param id The ID of the entity to update.
+     * @param entity The entity with the updated values.
+     * @return True if the update was successful, otherwise false.
+     */
+    fun update(id: Int, entity: T): Boolean {
+        return try {
+            transaction {
+                table
+                table.update({ table.id eq id }) {
+                    statement(it, entity)
+                } > 0
+            }
+        } catch (e: SQLException) {
+            println("Error updating $entityName with id $id: ${e.message}")
+            false
+        }
+    }
+
+
 }
