@@ -65,7 +65,7 @@ abstract class GenericDAO<T>(
      * @param id The ID of the entity to delete.
      * @return True if the deletion was successful, otherwise false.
      */
-    fun deleteById(id: Int): Boolean {
+    open fun deleteById(id: Int): Boolean {
         return try {
             transaction {
                 table.deleteWhere { table.id eq id } > 0
