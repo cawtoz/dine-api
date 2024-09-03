@@ -11,6 +11,10 @@ Dine API is a RESTful API designed for comprehensive restaurant management. Impl
 - **CRUD Operations**: Create, read, update, and delete records for various restaurant entities.
 - **Dynamic Configuration**: Configures the application using settings from a `.env` file.
 
+## Diagram UML
+![Diagram UML](https://github.com/user-attachments/assets/9dec3141-e695-4a27-acc9-267dbe8a0445)
+
+
 ## Installation and Setup
 1. **Clone the Repository:**
 
