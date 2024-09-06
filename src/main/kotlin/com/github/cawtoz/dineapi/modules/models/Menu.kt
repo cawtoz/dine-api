@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class Menu(
     val id: Int = 0,
     val name: String,
+    val restaurantId: Int,
     val foods: List<Food> = emptyList()
 )
