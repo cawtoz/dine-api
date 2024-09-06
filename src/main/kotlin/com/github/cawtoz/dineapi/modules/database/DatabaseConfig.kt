@@ -2,6 +2,7 @@ package com.github.cawtoz.dineapi.modules.database
 
 import com.github.cawtoz.dineapi.modules.database.tables.Foods
 import com.github.cawtoz.dineapi.modules.database.tables.Menus
+import com.github.cawtoz.dineapi.modules.database.tables.Restaurants
 import io.github.cdimascio.dotenv.dotenv
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -23,6 +24,7 @@ object DatabaseConfig {
         transaction {
             SchemaUtils.create(Menus)
             SchemaUtils.create(Foods)
+            SchemaUtils.create(Restaurants)
         }
 
     }
