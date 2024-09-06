@@ -8,4 +8,4 @@ Dine API is a RESTful API designed for comprehensive restaurant management. Impl
 - **PostgreSQL**: A powerful, open-source relational database management system.
 
 ## Documentation
-![Visit the website](https://cawtoz.github.io/dine-docs/) 🌐
+[Visit the website](https://cawtoz.github.io/dine-docs/) 🌐
