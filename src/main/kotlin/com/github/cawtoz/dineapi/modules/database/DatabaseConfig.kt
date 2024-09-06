@@ -22,9 +22,9 @@ object DatabaseConfig {
         )
 
         transaction {
+            SchemaUtils.create(Restaurants)
             SchemaUtils.create(Menus)
             SchemaUtils.create(Foods)
-            SchemaUtils.create(Restaurants)
         }
 
     }

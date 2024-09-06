@@ -10,7 +10,7 @@ import com.github.cawtoz.dineapi.modules.routes.crud.crudRoutes
 import io.ktor.server.application.Application
 
 fun Application.routesModule() {
-    crudRoutes<Food>("/food", FoodDAO())
-    crudRoutes<Menu>("/menu", MenuDAO())
     crudRoutes<Restaurant>("/restaurant", RestaurantDAO())
+    crudRoutes<Menu>("/menu", MenuDAO())
+    crudRoutes<Food>("/food", FoodDAO())
 }
