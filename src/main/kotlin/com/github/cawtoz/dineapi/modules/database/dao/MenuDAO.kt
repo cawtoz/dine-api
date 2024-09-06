@@ -6,7 +6,10 @@ import com.github.cawtoz.dineapi.modules.models.Menu
 class MenuDAO: GenericDAO<Menu>(
     "Menu",
     Menus,
-    { menu -> this[Menus.name] = menu.name },
+    { menu ->
+        this[Menus.name] = menu.name
+        this[Menus.restaurantId] = menu.restaurantId
+    },
     { row ->
         val menuId = row[Menus.id].value
         Menu(
