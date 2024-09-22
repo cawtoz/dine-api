@@ -15,6 +15,12 @@ class RestaurantDAO: GenericDAO<Restaurant>(
             MenuDAO().selectAll().filter { it.restaurantId == restaurantId }
         )
 
+    },
+    { restaurant, restaurantId ->
+        restaurant.menus.forEach { menu ->
+            menu.restaurantId = restaurantId
+            MenuDAO().insert(menu)
+        }
     }
 )
 
