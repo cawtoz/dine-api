@@ -18,12 +18,14 @@ import java.sql.SQLException
  * @property table The database table associated with this DAO.
  * @property statement A lambda function that defines how to insert an entity into the table.
  * @property toEntity A lambda function that converts a database row to an entity instance.
+ * @property afterInsert A lambda executed after a successful insertion, receiving the entity and its generated ID.
  */
 abstract class GenericDAO<T>(
     val entityName: String,
     val table: IntIdTable,
     private val statement: UpdateBuilder<*>.(T) -> Unit,
-    private val toEntity: (ResultRow) -> T
+    private val toEntity: (ResultRow) -> T,
+    private var afterInsert: (T, Int) -> Unit = { _, _ ->}
 ) {
 
     /**
@@ -85,9 +87,10 @@ abstract class GenericDAO<T>(
     fun insert(entity: T): Boolean {
         return try {
             transaction {
-                table.insertAndGetId {
+                val id = table.insertAndGetId {
                     statement(it, entity)
-                }
+                }.value
+                afterInsert(entity, id)
                 true
             }
         } catch (e: SQLException) {
