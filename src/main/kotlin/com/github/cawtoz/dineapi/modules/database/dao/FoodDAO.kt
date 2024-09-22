@@ -18,10 +18,10 @@ class FoodDAO: GenericDAO<Food>(
     },
     { row ->
         Food(
-            row[Foods.id].value,
             row[Foods.name],
             row[Foods.description],
             row[Foods.price],
+            row[Foods.id].value,
             row[Foods.menuId],
         )
     }

@@ -4,8 +4,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Menu(
-    val id: Int = 0,
     val name: String,
-    val restaurantId: Int,
-    val foods: List<Food> = emptyList()
-)
+    val foods: MutableList<Food> = mutableListOf(),
+    val id: Int = 0,
+    var restaurantId: Int = 0
+) {
+
+    fun addFood(vararg foods: Food): Menu {
+        this.foods.addAll(foods)
+        return this
+    }
+
+}

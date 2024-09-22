@@ -4,7 +4,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Restaurant(
-    val id: Int = 0,
     val name: String,
-    val menus: List<Menu> = emptyList()
-)
+    val menus: MutableList<Menu> = mutableListOf(),
+    val id: Int = 0
+) {
+
+    fun addMenu(vararg menus: Menu): Restaurant {
+        this.menus.addAll(menus)
+        return this
+    }
+
+}

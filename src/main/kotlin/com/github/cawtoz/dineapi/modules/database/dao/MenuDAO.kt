@@ -13,10 +13,10 @@ class MenuDAO: GenericDAO<Menu>(
     { row ->
         val menuId = row[Menus.id].value
         Menu(
-            menuId,
             row[Menus.name],
-            row[Menus.restaurantId],
-            FoodDAO().selectAll().filter { it.menuId == menuId }
+            FoodDAO().selectAll().filter { it.menuId == menuId }.toMutableList(),
+            menuId,
+            row[Menus.restaurantId]
         )
     },
     { menu, menuId ->
